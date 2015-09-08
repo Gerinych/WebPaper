@@ -13,7 +13,7 @@ namespace WebPaper {
         static string appdir = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "Webpaper");
-        Random r = new Random();
+        Random r = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
 
         public frmMain() {
             InitializeComponent();
