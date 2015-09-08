@@ -27,7 +27,7 @@ namespace WebPaper {
         }
 
         //bigass switch case statement
-        private void setInterval(int ind) {
+        private int setInterval(int ind) {
             int i = 0;
             switch (ind) {
                 case 0:
@@ -59,6 +59,7 @@ namespace WebPaper {
                     break;
             }
             timer1.Interval = i;
+            return i;
         }
 
         //get new image
@@ -94,9 +95,10 @@ namespace WebPaper {
 
         //set the interval from the combobox
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
+            if (Settings.Default.interval == comboBox1.SelectedIndex) return; 
             Settings.Default.interval = comboBox1.SelectedIndex;
             Settings.Default.Save();           
-            setInterval(comboBox1.SelectedIndex);
+            Console.WriteLine(setInterval(comboBox1.SelectedIndex));
             timer1.Stop();
             timer1.Start();
         }
