@@ -74,8 +74,15 @@ namespace WebPaper {
 
             //downloading json file into a string
             WebClient wc = new WebClient();
-            string s = wc.DownloadString("https://www.gstatic.com/prettyearth/assets/data/" + id + ".json");
-
+            string s;
+            try {
+                s = wc.DownloadString("https://www.gstatic.com/prettyearth/assets/data/" + id + ".json");
+            } catch (Exception ex) {
+                Console.WriteLine(ex.StackTrace);
+                wc.Dispose();
+                return;
+            }
+            wc.Dispose();
             //converting json file to object
             Location loc = JsonConvert.DeserializeObject<Location>(s);
 
